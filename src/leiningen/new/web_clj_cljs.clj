@@ -27,8 +27,9 @@
              ["project.clj" (render "project.clj" data)]
              ["README.md" (render "README.md" data)]
              [".gitignore" (render "gitignore" data)]
-             ["src/{{nested-dirs}}.clj" (render "core.clj" data)]
-             [(str "src/" (name-to-path handler-ns) ".clj")
-              (render "handler.clj" data)]
+             ["src/clj/{{nested-dirs}}.clj" (render "clj/core.clj" data)]
+             [(str "src/clj/" (name-to-path handler-ns) ".clj")
+              (render "clj/handler.clj" data)]
              ["test/{{nested-dirs}}_test.clj" (render "test.clj" data)]
+             ["src/cljs/{{nested-dirs}}.cljs" (render "cljs/core.cljs" data)]
              ["resources/public/index.html" (render "index.html" data)])))

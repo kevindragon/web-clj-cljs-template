@@ -7,7 +7,29 @@
                  [ring "1.7.1"]
                  [compojure "1.6.1"]
                  [ring/ring-defaults "0.3.2"]
-                 [ring/ring-json "0.4.0"]]
+                 [ring/ring-json "0.4.0"]
+                 [org.clojure/clojurescript "1.10.520"]]
   :main ^:skip-aot {{namespace}}
+  :source-paths ["src/clj"]
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+  :plugins [[lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]]
+  :clean-targets ^{:protect false} ["resources/public/js" "target"]
+  :cljsbuild
+  {:builds [{:id "dev"
+             :source-paths ["src/cljs"]
+             :compiler {:main {{namespace}}
+                        :output-to "resources/public/js/app.js"
+                        :output-dir "resources/public/js/out"
+                        :asset-path "js/out"
+                        :optimizations :none
+                        :source-map true
+                        :verbose true
+                        :pretty-print true}}
+            {:id "min"
+             :source-paths ["src/cljs"]
+             :compiler {:main {{namespace}}
+                        :output-to "resources/public/js/app.js"
+                        :optimizations :advanced}}]}
+  :profiles
+  {:provided {:dependencies []}
+   :uberjar {:aot :all}})
