@@ -12,7 +12,8 @@
   :main ^:skip-aot {{namespace}}
   :source-paths ["src/clj"]
   :target-path "target/%s"
-  :plugins [[lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]]
+  :plugins [[lein-cljsbuild "1.1.7" :exclusions [[org.clojure/clojure]]]
+            [lein-figwheel "0.5.18"]]
   :clean-targets ^{:protect false} ["resources/public/js" "target"]
   :cljsbuild
   {:builds [{:id "dev"
@@ -23,7 +24,6 @@
                         :asset-path "js/out"
                         :optimizations :none
                         :source-map true
-                        :verbose true
                         :pretty-print true}}
             {:id "min"
              :source-paths ["src/cljs"]
@@ -32,4 +32,7 @@
                         :optimizations :advanced}}]}
   :profiles
   {:provided {:dependencies []}
+   :dev {:dependencies [[figwheel-sidecar "0.5.18"]
+                        [cider/piggieback "0.4.1"]]
+         :repl-options {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}}
    :uberjar {:aot :all}})
