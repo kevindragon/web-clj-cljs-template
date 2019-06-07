@@ -31,8 +31,9 @@
                         :output-to "resources/public/js/app.js"
                         :optimizations :advanced}}]}
   :profiles
-  {:provided {:dependencies []}
+  {:provided {:dependencies [[reagent "0.8.1"]]}
    :dev {:dependencies [[figwheel-sidecar "0.5.18"]
                         [cider/piggieback "0.4.1"]]
          :repl-options {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]}}
-   :uberjar {:aot :all}})
+   :uberjar {:aot :all
+             :prep-tasks ["clean" ["cljsbuild" "once" "min"] "compile"]}})

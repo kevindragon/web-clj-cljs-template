@@ -10,8 +10,6 @@
 (defn web-clj-cljs
   "A web project template."
   [name & feature-params]
-  (println "feature-params")
-  (println feature-params)
   (let [main-ns (multi-segment (sanitize-ns name))
         handler-ns (multi-segment (sanitize-ns name) "handler")
         data {:raw-name name
